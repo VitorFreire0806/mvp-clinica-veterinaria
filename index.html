@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VetVida — Clínica Veterinária · Urgências 24h</title>
+<meta name="description" content="Clínica veterinária com urgências 24 horas, consultas, vacinação, cirurgia, imagiologia e internamento. Planos de saúde para cães e gatos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --mint:#eef7f4;
+    --mint-2:#d8eee7;
+    --teal:#1d6b63;
+    --teal-dark:#14504a;
+    --coral:#f2765a;
+    --coral-dark:#dc6145;
+    --ink:#14302d;
+    --muted:#5b716e;
+    --shadow:0 18px 44px rgba(20,48,45,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  img{display:block;width:100%;height:100%;object-fit:cover;color:transparent}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{line-height:1.12;font-weight:800;letter-spacing:-.02em}
+  .container{width:min(1560px,92%);margin-inline:auto}
+  section{padding:104px 0}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);background:var(--mint);padding:7px 14px;border-radius:999px;margin-bottom:18px}
+  .section-head{text-align:center;max-width:860px;margin:0 auto 60px}
+  .section-head h2{font-size:clamp(2.1rem,4vw,3.3rem)}
+  .section-head p{color:var(--muted);margin-top:14px;font-size:1.08rem}
+  .ph{background:linear-gradient(135deg,var(--mint),var(--mint-2));overflow:hidden;position:relative}
+  .ph img{transition:transform .8s ease}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:14px;font-weight:700;font-size:1rem;border:0;cursor:pointer;transition:transform .2s,background .2s;font-family:inherit}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-teal{background:var(--teal);color:#fff;box-shadow:0 10px 24px rgba(29,107,99,.28)}
+  .btn-teal:hover{background:var(--teal-dark)}
+  .btn-coral{background:var(--coral);color:#fff;box-shadow:0 10px 24px rgba(242,118,90,.32)}
+  .btn-coral:hover{background:var(--coral-dark)}
+  .btn-soft{background:var(--mint);color:var(--teal)}
+  .btn-wa{background:#25d366;color:#fff}
+  .btn-wa:hover{background:#1eb457}
+
+  /* TOPBAR */
+  .topbar{background:var(--teal-dark);color:#e3f2ee;font-size:.88rem}
+  .topbar .container{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:42px;flex-wrap:wrap}
+  .topbar a{color:#fff;font-weight:700}
+  .topbar .pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--coral);margin-right:8px;box-shadow:0 0 0 0 rgba(242,118,90,.7);animation:pulse 1.8s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(242,118,90,0)}100%{box-shadow:0 0 0 0 rgba(242,118,90,0)}}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(20,48,45,.07)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:80px;gap:20px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.45rem}
+  .logo .mark{width:44px;height:44px;border-radius:14px;background:var(--teal);display:grid;place-items:center;font-size:1.3rem}
+  .logo b{color:var(--coral)}
+  .logo small{display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:-3px}
+  .nav ul{display:flex;gap:30px;list-style:none;font-weight:600}
+  .nav ul a:hover{color:var(--teal)}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .nav-right .btn{padding:12px 22px}
+  .menu-toggle{display:none;background:none;border:0;font-size:1.8rem;cursor:pointer;color:var(--ink)}
+
+
+  /* IDIOMAS */
+  .lang{position:relative}
+  .lang-btn{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:1.5px solid var(--mint-2);background:#fff;color:var(--ink);font:inherit;font-weight:700;font-size:.85rem;cursor:pointer;transition:.25s}
+  .lang-btn:hover{border-color:var(--teal)}
+  .flag{width:22px;height:16px;object-fit:cover;border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.08);flex:none}
+  .caret{font-size:.6rem;opacity:.7}
+  .nav ul.lang-menu{display:block;gap:0;font-size:.92rem;letter-spacing:0;text-transform:none}
+  .lang-menu{position:absolute;right:0;top:calc(100% + 12px);background:#fff;border-radius:18px;box-shadow:0 18px 44px rgba(58,42,39,.16);list-style:none;padding:8px;min-width:210px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:.25s;z-index:70}
+  .lang.open .lang-menu{opacity:1;visibility:visible;transform:none}
+  .lang-menu button{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border:0;background:none;border-radius:12px;font:inherit;color:var(--ink);cursor:pointer;text-align:left}
+  .lang-menu button:hover{background:var(--mint)}
+  .lang-menu button.active{background:var(--mint-2);font-weight:700}
+
+  /* HERO */
+  .hero{background:linear-gradient(180deg,var(--mint) 0%,#fff 100%);padding:70px 0 100px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:70px;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,5vw,4.6rem);margin-bottom:22px}
+  .hero h1 span{color:var(--teal)}
+  .hero p{font-size:1.15rem;color:var(--muted);max-width:560px;margin-bottom:26px}
+  .checks{list-style:none;display:grid;gap:10px;margin-bottom:32px}
+  .checks li{display:flex;align-items:center;gap:10px;font-weight:600}
+  .checks li::before{content:"✓";flex:none;width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:.78rem;font-weight:800}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .hero-visual{position:relative;height:clamp(560px,44vw,720px)}
+  .hero-visual .main{position:absolute;inset:0 0 0 40px;border-radius:32px;box-shadow:var(--shadow)}
+  .float{position:absolute;background:#fff;border-radius:18px;padding:16px 20px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;animation:bob 4.5s ease-in-out infinite}
+  .float .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:1.35rem}
+  .float strong{display:block}
+  .float small{color:var(--muted)}
+  .fl1{left:0;top:70px}.fl1 .ic{background:#fde8e3}
+  .fl2{right:-14px;bottom:70px;animation-delay:1.6s}.fl2 .ic{background:var(--mint)}
+  @keyframes bob{50%{transform:translateY(-10px)}}
+
+  /* FAIXA */
+  .strip{padding:0;margin-top:-50px;position:relative;z-index:2}
+  .strip-box{background:#fff;border-radius:24px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr)}
+  .strip-item{display:flex;gap:14px;align-items:center;padding:28px 30px;border-right:1px solid var(--mint-2)}
+  .strip-item:last-child{border-right:0}
+  .strip-item .ic{flex:none;width:52px;height:52px;border-radius:16px;background:var(--mint);display:grid;place-items:center;font-size:1.5rem}
+  .strip-item strong{display:block;font-size:1.02rem}
+  .strip-item small{color:var(--muted)}
+
+  /* SERVIÇOS */
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .svc{background:#fff;border:1px solid #e3efeb;border-radius:22px;padding:30px;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .svc:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+  .svc .ic{width:58px;height:58px;border-radius:18px;background:var(--mint);display:grid;place-items:center;font-size:1.7rem;margin-bottom:18px}
+  .svc.urgent .ic{background:#fde8e3}
+  .svc h3{font-size:1.3rem;margin-bottom:8px}
+  .svc p{color:var(--muted);font-size:.96rem}
+
+  /* SOBRE */
+  .about{background:var(--mint)}
+  .about-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center}
+  .about-imgs{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:repeat(2,clamp(220px,17vw,300px));gap:16px}
+  .about-imgs .ph{border-radius:22px;box-shadow:var(--shadow)}
+  .about-imgs .ph:first-child{grid-row:span 2}
+  .about h2{font-size:clamp(2.1rem,3.8vw,3.2rem);margin-bottom:18px}
+  .about-grid > div > p{color:var(--muted);font-size:1.07rem;margin-bottom:28px}
+  .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .num{background:#fff;border-radius:18px;padding:22px;text-align:center}
+  .num strong{display:block;font-size:2.2rem;color:var(--teal);line-height:1.1}
+  .num span{color:var(--muted);font-size:.9rem}
+
+  /* PLANOS */
+  .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1300px;margin:0 auto}
+  .plan{background:#fff;border:1px solid #e3efeb;border-radius:26px;padding:38px 34px;display:flex;flex-direction:column}
+  .plan.featured{background:var(--teal);color:#fff;border-color:var(--teal);transform:translateY(-12px);box-shadow:0 26px 50px rgba(29,107,99,.3)}
+  .plan .badge{align-self:flex-start;background:var(--coral);color:#fff;font-size:.74rem;font-weight:700;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+  .plan h3{font-size:1.6rem}
+  .plan .for{color:var(--muted);margin-top:4px}
+  .plan.featured .for{color:#cfe7e2}
+  .plan .price{font-size:3rem;font-weight:800;margin:20px 0 4px;line-height:1}
+  .plan .price small{font-size:1rem;font-weight:600;opacity:.75}
+  .plan ul{list-style:none;display:grid;gap:12px;margin:22px 0 30px;flex:1}
+  .plan li{display:flex;gap:10px}
+  .plan li::before{content:"✓";color:var(--teal);font-weight:800}
+  .plan.featured li::before{color:#9ee0d3}
+  .plan .btn{width:100%}
+  .plan.featured .btn{background:#fff;color:var(--teal)}
+  .plans-note{text-align:center;color:var(--muted);margin-top:36px;font-size:.92rem}
+
+  /* EQUIPA */
+  .team{background:var(--mint)}
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .member{background:#fff;border-radius:24px;overflow:hidden}
+  .member .ph{height:clamp(380px,26vw,480px)}
+  .member div.info{padding:22px 24px}
+  .member h3{font-size:1.3rem}
+  .member span{color:var(--teal);font-weight:600;font-size:.95rem}
+
+  /* OPINIÕES */
+  .r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .review{background:var(--mint);border-radius:24px;padding:32px}
+  .review .stars{color:#f5a623;letter-spacing:3px;margin-bottom:12px}
+  .review p{font-size:1.04rem;margin-bottom:20px}
+  .who{display:flex;align-items:center;gap:12px}
+  .who .ph{width:50px;height:50px;border-radius:50%}
+  .who small{display:block;color:var(--muted)}
+
+  /* FAQ */
+  .faq{max-width:1100px;margin:0 auto;display:grid;gap:14px}
+  .faq details{background:#fff;border:1px solid #e3efeb;border-radius:18px;padding:22px 26px}
+  .faq summary{font-weight:700;font-size:1.08rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--teal);font-size:1.5rem;line-height:1}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{color:var(--muted);margin-top:10px}
+
+  /* MARCAÇÃO */
+  .book{background:var(--mint)}
+  .book-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:60px;align-items:start}
+  .book h2{font-size:clamp(2.1rem,3.8vw,3.2rem);margin-bottom:14px}
+  .book-grid > div > p{color:var(--muted);margin-bottom:26px}
+  .emergency{background:var(--coral);color:#fff;border-radius:20px;padding:24px 26px;display:flex;gap:16px;align-items:center;margin-bottom:26px}
+  .emergency .ic{font-size:2rem}
+  .emergency strong{display:block;font-size:1.15rem}
+  .emergency a{font-size:1.5rem;font-weight:800}
+  .contact-list{display:grid;gap:18px}
+  .contact-list > div{display:flex;gap:14px}
+  .contact-list .ic{font-size:1.3rem}
+  .contact-list strong{display:block}
+  .contact-list span{color:var(--muted)}
+  .hours{width:100%;border-collapse:collapse}
+  .hours td{padding:3px 0;color:var(--muted);font-size:.95rem}
+  .hours td:last-child{text-align:right;color:var(--ink);font-weight:700}
+  .hours tr.today td{color:var(--teal);font-weight:700}
+  .form{background:#fff;border-radius:26px;padding:clamp(28px,4vw,50px);box-shadow:var(--shadow)}
+  .form h3{font-size:1.7rem;margin-bottom:22px}
+  .fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .field{display:flex;flex-direction:column;gap:7px}
+  .field.full{grid-column:span 2}
+  .field label{font-size:.85rem;font-weight:700;color:var(--ink)}
+  .field input,.field select,.field textarea{border:1.5px solid #dcebe6;border-radius:12px;padding:13px 14px;font:inherit;color:var(--ink);background:#fbfdfc;outline:none}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal)}
+  .field textarea{min-height:90px;resize:vertical}
+  .form .btn{width:100%;margin-top:24px}
+  .form-note{text-align:center;color:var(--muted);font-size:.85rem;margin-top:12px}
+  .map{border-radius:22px;overflow:hidden;height:300px;margin-top:26px}
+  .map iframe{width:100%;height:100%;border:0}
+
+  footer{background:var(--ink);color:#b9ccc8;padding:64px 0 28px}
+  .foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:36px}
+  footer .logo{color:#fff;margin-bottom:14px}
+  footer .logo small{color:#8fb0aa}
+  footer h4{color:#fff;margin-bottom:12px}
+  footer li{list-style:none;margin-bottom:8px}
+  footer a:hover{color:#9ee0d3}
+  .copy{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;text-align:center;font-size:.85rem}
+
+  .wa-float{position:fixed;right:22px;bottom:22px;width:60px;height:60px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;font-size:1.7rem;box-shadow:0 10px 24px rgba(37,211,102,.45);z-index:60;transition:transform .2s}
+  .wa-float:hover{transform:scale(1.08)}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:1200px){
+    .svc-grid{grid-template-columns:repeat(3,1fr)}
+    .strip-box{grid-template-columns:repeat(2,1fr)}
+    .strip-item:nth-child(2){border-right:0}
+    .strip-item:nth-child(-n+2){border-bottom:1px solid var(--mint-2)}
+    .nav ul{gap:20px}
+  }
+  @media (max-width:1000px){
+    .hero-grid,.about-grid,.book-grid{grid-template-columns:1fr;gap:56px}
+    .svc-grid,.team-grid{grid-template-columns:repeat(2,1fr)}
+    .plans-grid,.r-grid{grid-template-columns:1fr;max-width:560px}
+    .r-grid{margin:0 auto}
+    .plan.featured{transform:none}
+    .foot{grid-template-columns:1fr}
+    .hero-visual{height:480px}
+  }
+  @media (max-width:900px){
+    .nav ul{display:none}
+    .nav ul.open{display:flex;flex-direction:column;position:absolute;top:80px;left:0;right:0;background:#fff;padding:22px 6%;gap:16px;box-shadow:0 12px 20px rgba(0,0,0,.06)}
+    .menu-toggle{display:block}
+    .nav-right .btn{display:none}
+    section{padding:76px 0}
+    .topbar .hide-sm{display:none}
+  }
+  @media (max-width:600px){
+    .svc-grid,.team-grid,.fields,.strip-box,.nums{grid-template-columns:1fr}
+    .strip-item{border-right:0!important;border-bottom:1px solid var(--mint-2)}
+    .field.full{grid-column:span 1}
+    .hero-visual{height:400px}
+    .fl2{right:0}
+    .logo small{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div><span class="pulse"></span><span data-i18n="k0">Urgências 24 horas, todos os dias:</span> <a href="tel:+351912345678">912 345 678</a></div>
+    <div class="hide-sm"><span>Avenida dos Animais, 120 · Lisboa</span></div>
+  </div>
+</div>
+
+<header>
+  <div class="container nav">
+    <a href="#inicio" class="logo"><span class="mark">🐾</span><span>Vet<b>Vida</b><small data-i18n="k7">Clínica Veterinária</small></span></a>
+    <ul id="menu">
+      <li><a href="#servicos" data-i18n="k1">Serviços</a></li>
+      <li><a href="#planos" data-i18n="k2">Planos de saúde</a></li>
+      <li><a href="#sobre" data-i18n="k3">A Clínica</a></li>
+      <li><a href="#equipa" data-i18n="k4">Equipa</a></li>
+      <li><a href="#marcar" data-i18n="k5">Contactos</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang" id="lang">
+        <button type="button" class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+          <img class="flag" id="langFlag" src="https://flagcdn.com/w40/pt.png" alt="" width="22" height="16"><span id="langCode">PT</span><span class="caret">▾</span>
+        </button>
+        <ul class="lang-menu" id="langMenu">
+          <li><button type="button" data-lang="pt"><img class="flag" src="https://flagcdn.com/w40/pt.png" alt="" width="22" height="16">Português</button></li>
+          <li><button type="button" data-lang="en"><img class="flag" src="https://flagcdn.com/w40/gb.png" alt="" width="22" height="16">English</button></li>
+          <li><button type="button" data-lang="es"><img class="flag" src="https://flagcdn.com/w40/es.png" alt="" width="22" height="16">Español</button></li>
+          <li><button type="button" data-lang="fr"><img class="flag" src="https://flagcdn.com/w40/fr.png" alt="" width="22" height="16">Français</button></li>
+          <li><button type="button" data-lang="it"><img class="flag" src="https://flagcdn.com/w40/it.png" alt="" width="22" height="16">Italiano</button></li>
+          <li><button type="button" data-lang="de"><img class="flag" src="https://flagcdn.com/w40/de.png" alt="" width="22" height="16">Deutsch</button></li>
+          <li><button type="button" data-lang="uk"><img class="flag" src="https://flagcdn.com/w40/ua.png" alt="" width="22" height="16">Українська</button></li>
+          <li><button type="button" data-lang="ru"><img class="flag" src="https://flagcdn.com/w40/ru.png" alt="" width="22" height="16">Русский</button></li>
+          <li><button type="button" data-lang="ja"><img class="flag" src="https://flagcdn.com/w40/jp.png" alt="" width="22" height="16">日本語</button></li>
+          <li><button type="button" data-lang="zh"><img class="flag" src="https://flagcdn.com/w40/cn.png" alt="" width="22" height="16">中文</button></li>
+        </ul>
+      </div>
+
+      <a href="#marcar" class="btn btn-teal" data-i18n="k6">Marcar consulta</a>
+      <button class="menu-toggle" aria-label="Abrir menu" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="eyebrow" data-i18n="k8">🩺 Clínica veterinária em Lisboa</span>
+      <h1 data-i18n="k9">Cuidamos de quem lhe dá <span>amor incondicional.</span></h1>
+      <p data-i18n="k10">Medicina veterinária de confiança para cães, gatos e animais exóticos, com uma equipa que trata cada paciente como se fosse da família.</p>
+      <ul class="checks">
+        <li data-i18n="k11">Urgências 24 horas, 365 dias por ano</li>
+        <li data-i18n="k12">Laboratório e imagiologia na própria clínica</li>
+        <li data-i18n="k13">Consultas ao domicílio</li>
+      </ul>
+      <div class="hero-actions">
+        <a href="#marcar" class="btn btn-teal" data-i18n="k14">📅 Marcar consulta</a>
+        <a href="tel:+351912345678" class="btn btn-coral" data-i18n="k15">🚨 Urgência</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="main ph"><img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=1200&q=80" alt="Veterinária com um cão"></div>
+      <div class="float fl1"><div class="ic">❤️</div><div><strong>+12.000</strong><small data-i18n="k16">Patudos tratados</small></div></div>
+      <div class="float fl2"><div class="ic">⭐</div><div><strong data-i18n="k17">4,9 no Google</strong><small data-i18n="k18">610 avaliações</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAIXA -->
+<section class="strip">
+  <div class="container">
+    <div class="strip-box reveal">
+      <div class="strip-item"><div class="ic">🚑</div><div><strong data-i18n="k19">Urgências 24h</strong><small data-i18n="k20">Sempre um veterinário de serviço</small></div></div>
+      <div class="strip-item"><div class="ic">🏠</div><div><strong data-i18n="k21">Ao domicílio</strong><small data-i18n="k22">Consultas e vacinas em casa</small></div></div>
+      <div class="strip-item"><div class="ic">🔬</div><div><strong data-i18n="k23">Laboratório próprio</strong><small data-i18n="k24">Análises em poucos minutos</small></div></div>
+      <div class="strip-item"><div class="ic">🛏️</div><div><strong data-i18n="k25">Internamento</strong><small data-i18n="k26">Vigilância permanente</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="k1">Serviços</span>
+      <h2 data-i18n="k27">Tudo o que o seu animal precisa, num só lugar</h2>
+      <p data-i18n="k28">Da prevenção à cirurgia, acompanhamos o seu companheiro em todas as fases da vida.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal"><div class="ic">🩺</div><h3 data-i18n="k29">Consultas</h3><p data-i18n="k30">Medicina geral, check-ups anuais e acompanhamento de doenças crónicas.</p></div>
+      <div class="svc reveal"><div class="ic">💉</div><h3 data-i18n="k31">Vacinação e desparasitação</h3><p data-i18n="k32">Planos de vacinação adaptados à idade e ao estilo de vida do seu animal.</p></div>
+      <div class="svc reveal"><div class="ic">🏥</div><h3 data-i18n="k33">Cirurgia</h3><p data-i18n="k34">Esterilizações, cirurgia de tecidos moles e ortopedia, com anestesia monitorizada.</p></div>
+      <div class="svc urgent reveal"><div class="ic">🚨</div><h3 data-i18n="k19">Urgências 24h</h3><p data-i18n="k35">Equipa disponível dia e noite, incluindo fins de semana e feriados.</p></div>
+      <div class="svc reveal"><div class="ic">🦷</div><h3 data-i18n="k36">Dentisteria</h3><p data-i18n="k37">Destartarização, extrações e cuidados de higiene oral.</p></div>
+      <div class="svc reveal"><div class="ic">📷</div><h3 data-i18n="k38">Imagiologia</h3><p data-i18n="k39">Raio-X digital e ecografia para diagnósticos rápidos e precisos.</p></div>
+      <div class="svc reveal"><div class="ic">🐇</div><h3 data-i18n="k40">Animais exóticos</h3><p data-i18n="k41">Coelhos, roedores, aves e répteis, com veterinários especializados.</p></div>
+      <div class="svc reveal"><div class="ic">📍</div><h3 data-i18n="k42">Identificação eletrónica</h3><p data-i18n="k43">Colocação de microchip e registo obrigatório do seu animal.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="about" id="sobre">
+  <div class="container about-grid">
+    <div class="about-imgs reveal">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=900&q=75" alt="Consulta veterinária"></div>
+      <div class="ph"><img src="https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?auto=format&fit=crop&w=700&q=75" alt="Gatinho"></div>
+      <div class="ph"><img src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=700&q=75" alt="Cão"></div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow" data-i18n="k3">A Clínica</span>
+      <h2 data-i18n="k44">Medicina de excelência, com coração.</h2>
+      <p data-i18n="k45">Há mais de 15 anos que cuidamos dos animais da nossa cidade. Investimos em equipamentos modernos e em formação contínua, mas acima de tudo em tempo: tempo para ouvir, explicar e tratar com calma.</p>
+      <div class="nums">
+        <div class="num"><strong>15</strong><span data-i18n="k46">anos de experiência</span></div>
+        <div class="num"><strong>9</strong><span data-i18n="k47">médicos veterinários</span></div>
+        <div class="num"><strong>24h</strong><span data-i18n="k48">todos os dias</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section id="planos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="k2">Planos de saúde</span>
+      <h2 data-i18n="k49">Prevenir é a melhor forma de cuidar</h2>
+      <p data-i18n="k50">Uma mensalidade simples que inclui as consultas e vacinas essenciais, com descontos em todos os outros serviços.</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan reveal">
+        <h3 data-i18n="k51">Plano Bebé</h3><span class="for" data-i18n="k52">Cachorros e gatinhos até 1 ano</span>
+        <div class="price">19 € <small data-i18n="k53">/mês</small></div>
+        <ul><li data-i18n="k54">Todas as vacinas do primeiro ano</li><li data-i18n="k55">Desparasitação interna e externa</li><li data-i18n="k56">Consultas ilimitadas</li><li data-i18n="k57">Microchip incluído</li></ul>
+        <a href="#marcar" class="btn btn-soft" data-i18n="k58">Aderir ao plano</a>
+      </div>
+      <div class="plan featured reveal">
+        <span class="badge" data-i18n="k59">Mais escolhido</span>
+        <h3 data-i18n="k60">Plano Adulto</h3><span class="for" data-i18n="k61">Cães e gatos de 1 a 7 anos</span>
+        <div class="price">15 € <small data-i18n="k53">/mês</small></div>
+        <ul><li data-i18n="k62">Vacinação anual</li><li data-i18n="k63">Desparasitação durante todo o ano</li><li data-i18n="k64">Check-up anual com análises</li><li data-i18n="k65">15% de desconto em cirurgias</li></ul>
+        <a href="#marcar" class="btn" data-i18n="k58">Aderir ao plano</a>
+      </div>
+      <div class="plan reveal">
+        <h3 data-i18n="k66">Plano Sénior</h3><span class="for" data-i18n="k67">Cães e gatos a partir dos 8 anos</span>
+        <div class="price">25 € <small data-i18n="k53">/mês</small></div>
+        <ul><li data-i18n="k68">Dois check-ups por ano com análises</li><li data-i18n="k69">Ecografia anual</li><li data-i18n="k31">Vacinação e desparasitação</li><li data-i18n="k70">20% de desconto em tratamentos</li></ul>
+        <a href="#marcar" class="btn btn-soft" data-i18n="k58">Aderir ao plano</a>
+      </div>
+    </div>
+    <p class="plans-note" data-i18n="k71">Sem fidelização. Pode cancelar a qualquer momento.</p>
+  </div>
+</section>
+
+<!-- EQUIPA -->
+<section class="team" id="equipa">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="k4">Equipa</span>
+      <h2 data-i18n="k72">Veterinários que amam o que fazem</h2>
+      <p data-i18n="k73">Uma equipa experiente, em formação contínua e com áreas de especialidade complementares.</p>
+    </div>
+    <div class="team-grid">
+      <div class="member reveal"><div class="ph"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=75" alt="Dra. Joana Pires"></div><div class="info"><h3>Dra. Joana Pires</h3><span data-i18n="k74">Diretora clínica · Cirurgia</span></div></div>
+      <div class="member reveal"><div class="ph"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=75" alt="Dr. Tiago Ferreira"></div><div class="info"><h3>Dr. Tiago Ferreira</h3><span data-i18n="k75">Medicina interna · Imagiologia</span></div></div>
+      <div class="member reveal"><div class="ph"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=800&q=75" alt="Dra. Marta Sousa"></div><div class="info"><h3>Dra. Marta Sousa</h3><span data-i18n="k76">Animais exóticos · Dentisteria</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OPINIÕES -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="k77">Opiniões</span>
+      <h2 data-i18n="k78">A confiança de milhares de famílias</h2>
+    </div>
+    <div class="r-grid">
+      <div class="review reveal"><div class="stars">★★★★★</div><p data-i18n="k79">“Fui às 3 da manhã com o meu cão a vomitar e fomos atendidos de imediato. Salvaram-lhe a vida. Eternamente gratos.”</p><div class="who"><div class="ph"><img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=120&q=70" alt=""></div><div><strong>Pedro A.</strong><small data-i18n="k80">Tutor do Max</small></div></div></div>
+      <div class="review reveal"><div class="stars">★★★★★</div><p data-i18n="k81">“A minha gata tem muito medo de sair de casa e a consulta ao domicílio foi a melhor solução. Muito profissionais.”</p><div class="who"><div class="ph"><img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=120&q=70" alt=""></div><div><strong>Catarina V.</strong><small data-i18n="k82">Tutora da Kika</small></div></div></div>
+      <div class="review reveal"><div class="stars">★★★★★</div><p data-i18n="k83">“Finalmente encontrei uma clínica que percebe de coelhos! Explicaram tudo com paciência e o Tambor recuperou muito bem.”</p><div class="who"><div class="ph"><img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=120&q=70" alt=""></div><div><strong>Sara M.</strong><small data-i18n="k84">Tutora do Tambor</small></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding-top:0">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="k85">Perguntas frequentes</span>
+      <h2 data-i18n="k86">Dúvidas? Nós ajudamos.</h2>
+    </div>
+    <div class="faq reveal">
+      <details open><summary data-i18n="k87">Preciso de marcar para uma urgência?</summary><p data-i18n="k88">Não. Em caso de urgência venha diretamente à clínica ou ligue para o 912 345 678 para prepararmos a sua chegada.</p></details>
+      <details><summary data-i18n="k89">Atendem animais exóticos?</summary><p data-i18n="k90">Sim. Temos veterinários com experiência em coelhos, roedores, aves e répteis.</p></details>
+      <details><summary data-i18n="k91">Como funcionam os planos de saúde?</summary><p data-i18n="k92">Paga uma mensalidade fixa e tem incluídos os cuidados preventivos essenciais, além de descontos nos restantes serviços. Não há fidelização.</p></details>
+      <details><summary data-i18n="k93">Que formas de pagamento aceitam?</summary><p data-i18n="k94">Aceitamos numerário, cartão de débito e crédito e MB WAY.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- MARCAÇÃO -->
+<section class="book" id="marcar">
+  <div class="container book-grid">
+    <div class="reveal">
+      <span class="eyebrow" data-i18n="k95">Marcações</span>
+      <h2 data-i18n="k96">Marque a consulta do seu animal</h2>
+      <p data-i18n="k97">Preencha o pedido e entramos em contacto por WhatsApp para confirmar o dia e a hora.</p>
+      <div class="emergency"><div class="ic">🚨</div><div><strong data-i18n="k98">Urgência? Ligue já</strong><a href="tel:+351912345678">912 345 678</a></div></div>
+      <div class="contact-list">
+        <div><div class="ic">📍</div><div><strong data-i18n="k99">Morada</strong><span>Avenida dos Animais, 120<br>1000-000 Lisboa</span></div></div>
+        <div><div class="ic">📞</div><div><strong data-i18n="k100">Telefone</strong><span>21 234 5678</span></div></div>
+        <div><div class="ic">🕘</div><div style="flex:1"><strong data-i18n="k101">Consultas programadas</strong>
+          <table class="hours" id="hours">
+            <tr data-d="1"><td data-i18n="k102">Segunda a Sexta</td><td>9h00 – 21h00</td></tr>
+            <tr data-d="6"><td data-i18n="k103">Sábado</td><td>9h00 – 19h00</td></tr>
+            <tr data-d="0"><td data-i18n="k104">Domingo</td><td data-i18n="k105">Só urgências</td></tr>
+          </table></div></div>
+      </div>
+      <div class="map"><iframe src="https://www.google.com/maps?q=Lisboa&output=embed" loading="lazy" title="Mapa da clínica"></iframe></div>
+    </div>
+    <form class="form reveal" id="bookForm">
+      <h3 data-i18n="k106">Pedido de consulta</h3>
+      <div class="fields">
+        <div class="field"><label for="f-owner" data-i18n="k107">O seu nome</label><input id="f-owner" required autocomplete="name"></div>
+        <div class="field"><label for="f-pet" data-i18n="k108">Nome do animal</label><input id="f-pet" required></div>
+        <div class="field"><label for="f-species" data-i18n="k109">Espécie</label>
+          <select id="f-species">
+            <option value="Cão" data-i18n="k110">Cão</option>
+            <option value="Gato" data-i18n="k111">Gato</option>
+            <option value="Coelho" data-i18n="k112">Coelho</option>
+            <option value="Ave" data-i18n="k113">Ave</option>
+            <option value="Outro" data-i18n="k114">Outro</option>
+          </select></div>
+        <div class="field"><label for="f-reason" data-i18n="k115">Motivo</label>
+          <select id="f-reason">
+            <option value="Consulta" data-i18n="k116">Consulta</option>
+            <option value="Vacinação" data-i18n="k117">Vacinação</option>
+            <option value="Check-up" data-i18n="k118">Check-up</option>
+            <option value="Avaliação para cirurgia" data-i18n="k119">Avaliação para cirurgia</option>
+            <option value="Consulta ao domicílio" data-i18n="k120">Consulta ao domicílio</option>
+            <option value="Plano de saúde" data-i18n="k121">Plano de saúde</option>
+          </select></div>
+        <div class="field"><label for="f-date" data-i18n="k122">Data preferida</label><input id="f-date" type="date" required></div>
+        <div class="field"><label for="f-period" data-i18n="k123">Período</label>
+          <select id="f-period">
+            <option value="Manhã" data-i18n="k124">Manhã</option>
+            <option value="Tarde" data-i18n="k125">Tarde</option>
+            <option value="Fim do dia" data-i18n="k126">Fim do dia</option>
+          </select></div>
+        <div class="field full"><label for="f-notes" data-i18n="k127">Descreva brevemente a situação (opcional)</label><textarea id="f-notes"></textarea></div>
+      </div>
+      <button type="submit" class="btn btn-wa" data-i18n="k128">💬 Enviar pedido por WhatsApp</button>
+      <p class="form-note" data-i18n="k129">Para urgências, ligue diretamente: não espere pela resposta.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot">
+      <div><div class="logo"><span class="mark">🐾</span><span>Vet<b>Vida</b><small data-i18n="k7">Clínica Veterinária</small></span></div><p style="max-width:400px" data-i18n="k130">Clínica veterinária com urgências 24 horas. Cuidamos do seu melhor amigo com ciência, experiência e muito carinho.</p></div>
+      <div><h4 data-i18n="k131">Navegação</h4><ul><li><a href="#servicos" data-i18n="k1">Serviços</a></li><li><a href="#planos" data-i18n="k2">Planos de saúde</a></li><li><a href="#equipa" data-i18n="k4">Equipa</a></li><li><a href="#marcar" data-i18n="k5">Contactos</a></li></ul></div>
+      <div><h4 data-i18n="k132">Siga-nos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">Google</a></li></ul></div>
+    </div>
+    <div class="copy">© <span id="y"></span> VetVida Clínica Veterinária · <span data-i18n="k133">Todos os direitos reservados</span></div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/351912345678" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
+<script>
+  document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('menu').classList.remove('open')));
+
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  document.querySelectorAll('.ph img').forEach(img=>{
+    const hide=()=>img.style.visibility='hidden';
+    if(img.complete&&img.naturalWidth===0)hide();else img.addEventListener('error',hide);
+  });
+
+  // Marcação: abre o WhatsApp com a mensagem já escrita (sempre em português, para a clínica)
+  document.getElementById('f-date').min=new Date().toISOString().slice(0,10);
+  document.getElementById('bookForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const v=id=>document.getElementById(id).value.trim();
+    const [y,m,d]=v('f-date').split('-');
+    let msg=`Olá! Gostaria de marcar uma consulta.\nTutor: ${v('f-owner')}\nAnimal: ${v('f-pet')} (${v('f-species')})\nMotivo: ${v('f-reason')}\nData preferida: ${d}/${m}/${y}\nPeríodo: ${v('f-period')}`;
+    if(v('f-notes'))msg+=`\nSituação: ${v('f-notes')}`;
+    window.open('https://wa.me/351912345678?text='+encodeURIComponent(msg),'_blank');
+  });
+
+  const day=new Date().getDay();
+  const row=document.querySelector(`#hours tr[data-d="${day>=1&&day<=5?1:day}"]`);
+  if(row)row.classList.add('today');
+  document.getElementById('y').textContent=new Date().getFullYear();
+
+  // ---------- IDIOMAS ----------
+  const I18N = {"en": {"k0": "24-hour emergencies, every day:", "k1": "Services", "k2": "Health plans", "k3": "The Clinic", "k4": "Team", "k5": "Contact", "k6": "Book an appointment", "k7": "Veterinary Clinic", "k8": "🩺 Veterinary clinic in Lisbon", "k9": "We care for those who give you <span>unconditional love.</span>", "k10": "Trusted veterinary care for dogs, cats and exotic pets, with a team that treats every patient like family.", "k11": "24-hour emergencies, 365 days a year", "k12": "In-house laboratory and imaging", "k13": "Home visits", "k14": "📅 Book an appointment", "k15": "🚨 Emergency", "k16": "Pets treated", "k17": "4.9 on Google", "k18": "610 reviews", "k19": "24h Emergencies", "k20": "A vet always on duty", "k21": "Home visits", "k22": "Appointments and vaccines at home", "k23": "In-house lab", "k24": "Test results in minutes", "k25": "Hospitalisation", "k26": "Round-the-clock monitoring", "k27": "Everything your pet needs, in one place", "k28": "From prevention to surgery, we look after your companion at every stage of life.", "k29": "Consultations", "k30": "General medicine, annual check-ups and management of chronic conditions.", "k31": "Vaccination and parasite control", "k32": "Vaccination plans tailored to your pet's age and lifestyle.", "k33": "Surgery", "k34": "Neutering, soft tissue surgery and orthopaedics, with monitored anaesthesia.", "k35": "Our team is available day and night, including weekends and public holidays.", "k36": "Dentistry", "k37": "Scaling, extractions and oral hygiene care.", "k38": "Imaging", "k39": "Digital X-ray and ultrasound for fast, accurate diagnosis.", "k40": "Exotic pets", "k41": "Rabbits, rodents, birds and reptiles, with specialised vets.", "k42": "Microchipping", "k43": "Microchip implantation and mandatory registration of your pet.", "k44": "Excellent medicine, with heart.", "k45": "For more than 15 years we have cared for the animals of our city. We invest in modern equipment and ongoing training, but above all in time: time to listen, explain and treat calmly.", "k46": "years of experience", "k47": "veterinarians", "k48": "every day", "k49": "Prevention is the best way to care", "k50": "A simple monthly fee that includes essential check-ups and vaccines, with discounts on all other services.", "k51": "Baby Plan", "k52": "Puppies and kittens up to 1 year", "k53": "/month", "k54": "All first-year vaccines", "k55": "Internal and external parasite control", "k56": "Unlimited consultations", "k57": "Microchip included", "k58": "Join the plan", "k59": "Most popular", "k60": "Adult Plan", "k61": "Dogs and cats aged 1 to 7", "k62": "Annual vaccination", "k63": "Year-round parasite control", "k64": "Annual check-up with blood tests", "k65": "15% off surgery", "k66": "Senior Plan", "k67": "Dogs and cats aged 8 and over", "k68": "Two check-ups a year with blood tests", "k69": "Annual ultrasound", "k70": "20% off treatments", "k71": "No lock-in period. Cancel at any time.", "k72": "Vets who love what they do", "k73": "An experienced team in continuous training, with complementary areas of expertise.", "k74": "Clinical director · Surgery", "k75": "Internal medicine · Imaging", "k76": "Exotic pets · Dentistry", "k77": "Reviews", "k78": "Trusted by thousands of families", "k79": "“I came in at 3 a.m. with my dog vomiting and we were seen immediately. They saved his life. Forever grateful.”", "k80": "Max's owner", "k81": "“My cat is very scared of leaving home and the home visit was the perfect solution. Very professional.”", "k82": "Kika's owner", "k83": "“At last a clinic that understands rabbits! They explained everything patiently and Tambor recovered really well.”", "k84": "Tambor's owner", "k85": "Frequently asked questions", "k86": "Questions? We're here to help.", "k87": "Do I need to book for an emergency?", "k88": "No. In an emergency, come straight to the clinic or call 912 345 678 so we can prepare for your arrival.", "k89": "Do you treat exotic pets?", "k90": "Yes. We have vets experienced with rabbits, rodents, birds and reptiles.", "k91": "How do the health plans work?", "k92": "You pay a fixed monthly fee that covers essential preventive care, plus discounts on all other services. There is no lock-in.", "k93": "What payment methods do you accept?", "k94": "We accept cash, debit and credit cards, and MB WAY.", "k95": "Appointments", "k96": "Book your pet's appointment", "k97": "Fill in the request and we'll contact you on WhatsApp to confirm the day and time.", "k98": "Emergency? Call now", "k99": "Address", "k100": "Phone", "k101": "Scheduled appointments", "k102": "Monday to Friday", "k103": "Saturday", "k104": "Sunday", "k105": "Emergencies only", "k106": "Appointment request", "k107": "Your name", "k108": "Pet's name", "k109": "Species", "k110": "Dog", "k111": "Cat", "k112": "Rabbit", "k113": "Bird", "k114": "Other", "k115": "Reason", "k116": "Consultation", "k117": "Vaccination", "k118": "Check-up", "k119": "Pre-surgery assessment", "k120": "Home visit", "k121": "Health plan", "k122": "Preferred date", "k123": "Time of day", "k124": "Morning", "k125": "Afternoon", "k126": "Evening", "k127": "Briefly describe the situation (optional)", "k128": "💬 Send request via WhatsApp", "k129": "For emergencies, call us directly: don't wait for a reply.", "k130": "Veterinary clinic with 24-hour emergency care. We look after your best friend with science, experience and lots of love.", "k131": "Navigation", "k132": "Follow us", "k133": "All rights reserved"}, "es": {"k0": "Urgencias 24 horas, todos los días:", "k1": "Servicios", "k2": "Planes de salud", "k3": "La Clínica", "k4": "Equipo", "k5": "Contacto", "k6": "Pedir cita", "k7": "Clínica Veterinaria", "k8": "🩺 Clínica veterinaria en Lisboa", "k9": "Cuidamos de quien le da <span>amor incondicional.</span>", "k10": "Medicina veterinaria de confianza para perros, gatos y animales exóticos, con un equipo que trata a cada paciente como si fuera de la familia.", "k11": "Urgencias 24 horas, 365 días al año", "k12": "Laboratorio e imagen en la propia clínica", "k13": "Consultas a domicilio", "k14": "📅 Pedir cita", "k15": "🚨 Urgencia", "k16": "Mascotas atendidas", "k17": "4,9 en Google", "k18": "610 reseñas", "k19": "Urgencias 24h", "k20": "Siempre un veterinario de guardia", "k21": "A domicilio", "k22": "Consultas y vacunas en casa", "k23": "Laboratorio propio", "k24": "Análisis en pocos minutos", "k25": "Hospitalización", "k26": "Vigilancia permanente", "k27": "Todo lo que su animal necesita, en un solo lugar", "k28": "De la prevención a la cirugía, acompañamos a su compañero en todas las etapas de su vida.", "k29": "Consultas", "k30": "Medicina general, revisiones anuales y seguimiento de enfermedades crónicas.", "k31": "Vacunación y desparasitación", "k32": "Planes de vacunación adaptados a la edad y al estilo de vida de su animal.", "k33": "Cirugía", "k34": "Esterilizaciones, cirugía de tejidos blandos y traumatología, con anestesia monitorizada.", "k35": "Equipo disponible día y noche, incluidos fines de semana y festivos.", "k36": "Odontología", "k37": "Limpieza dental, extracciones y cuidados de higiene oral.", "k38": "Diagnóstico por imagen", "k39": "Rayos X digitales y ecografía para diagnósticos rápidos y precisos.", "k40": "Animales exóticos", "k41": "Conejos, roedores, aves y reptiles, con veterinarios especializados.", "k42": "Identificación electrónica", "k43": "Colocación de microchip y registro obligatorio de su animal.", "k44": "Medicina de excelencia, con corazón.", "k45": "Desde hace más de 15 años cuidamos de los animales de nuestra ciudad. Invertimos en equipos modernos y en formación continua, pero sobre todo en tiempo: tiempo para escuchar, explicar y tratar con calma.", "k46": "años de experiencia", "k47": "veterinarios", "k48": "todos los días", "k49": "Prevenir es la mejor forma de cuidar", "k50": "Una cuota mensual sencilla que incluye las consultas y vacunas esenciales, con descuentos en todos los demás servicios.", "k51": "Plan Bebé", "k52": "Cachorros y gatitos hasta 1 año", "k53": "/mes", "k54": "Todas las vacunas del primer año", "k55": "Desparasitación interna y externa", "k56": "Consultas ilimitadas", "k57": "Microchip incluido", "k58": "Contratar el plan", "k59": "El más elegido", "k60": "Plan Adulto", "k61": "Perros y gatos de 1 a 7 años", "k62": "Vacunación anual", "k63": "Desparasitación durante todo el año", "k64": "Revisión anual con análisis", "k65": "15% de descuento en cirugías", "k66": "Plan Sénior", "k67": "Perros y gatos a partir de 8 años", "k68": "Dos revisiones al año con análisis", "k69": "Ecografía anual", "k70": "20% de descuento en tratamientos", "k71": "Sin permanencia. Puede cancelar en cualquier momento.", "k72": "Veterinarios que aman lo que hacen", "k73": "Un equipo con experiencia, en formación continua y con especialidades complementarias.", "k74": "Directora clínica · Cirugía", "k75": "Medicina interna · Diagnóstico por imagen", "k76": "Animales exóticos · Odontología", "k77": "Opiniones", "k78": "La confianza de miles de familias", "k79": "“Fui a las 3 de la mañana con mi perro vomitando y nos atendieron de inmediato. Le salvaron la vida. Eternamente agradecidos.”", "k80": "Dueño de Max", "k81": "“Mi gata tiene mucho miedo de salir de casa y la consulta a domicilio fue la mejor solución. Muy profesionales.”", "k82": "Dueña de Kika", "k83": "“¡Por fin encontré una clínica que sabe de conejos! Lo explicaron todo con paciencia y Tambor se recuperó muy bien.”", "k84": "Dueña de Tambor", "k85": "Preguntas frecuentes", "k86": "¿Dudas? Le ayudamos.", "k87": "¿Tengo que pedir cita para una urgencia?", "k88": "No. En caso de urgencia venga directamente a la clínica o llame al 912 345 678 para que preparemos su llegada.", "k89": "¿Atienden animales exóticos?", "k90": "Sí. Tenemos veterinarios con experiencia en conejos, roedores, aves y reptiles.", "k91": "¿Cómo funcionan los planes de salud?", "k92": "Paga una cuota mensual fija que incluye los cuidados preventivos esenciales, además de descuentos en los demás servicios. No hay permanencia.", "k93": "¿Qué formas de pago aceptan?", "k94": "Aceptamos efectivo, tarjeta de débito y crédito, y MB WAY.", "k95": "Citas", "k96": "Pida cita para su animal", "k97": "Rellene la solicitud y le contactamos por WhatsApp para confirmar el día y la hora.", "k98": "¿Urgencia? Llame ya", "k99": "Dirección", "k100": "Teléfono", "k101": "Consultas programadas", "k102": "Lunes a viernes", "k103": "Sábado", "k104": "Domingo", "k105": "Solo urgencias", "k106": "Solicitud de cita", "k107": "Su nombre", "k108": "Nombre del animal", "k109": "Especie", "k110": "Perro", "k111": "Gato", "k112": "Conejo", "k113": "Ave", "k114": "Otro", "k115": "Motivo", "k116": "Consulta", "k117": "Vacunación", "k118": "Revisión", "k119": "Valoración para cirugía", "k120": "Consulta a domicilio", "k121": "Plan de salud", "k122": "Fecha preferida", "k123": "Franja horaria", "k124": "Mañana", "k125": "Tarde", "k126": "Última hora", "k127": "Describa brevemente la situación (opcional)", "k128": "💬 Enviar solicitud por WhatsApp", "k129": "En caso de urgencia, llame directamente: no espere la respuesta.", "k130": "Clínica veterinaria con urgencias 24 horas. Cuidamos de su mejor amigo con ciencia, experiencia y mucho cariño.", "k131": "Navegación", "k132": "Síganos", "k133": "Todos los derechos reservados"}, "fr": {"k0": "Urgences 24 h/24, tous les jours :", "k1": "Services", "k2": "Plans santé", "k3": "La Clinique", "k4": "Équipe", "k5": "Contact", "k6": "Prendre rendez-vous", "k7": "Clinique Vétérinaire", "k8": "🩺 Clinique vétérinaire à Lisbonne", "k9": "Nous prenons soin de ceux qui vous donnent <span>un amour inconditionnel.</span>", "k10": "Une médecine vétérinaire de confiance pour chiens, chats et NAC, avec une équipe qui traite chaque patient comme un membre de la famille.", "k11": "Urgences 24 h/24, 365 jours par an", "k12": "Laboratoire et imagerie sur place", "k13": "Consultations à domicile", "k14": "📅 Prendre rendez-vous", "k15": "🚨 Urgence", "k16": "Animaux soignés", "k17": "4,9 sur Google", "k18": "610 avis", "k19": "Urgences 24 h/24", "k20": "Toujours un vétérinaire de garde", "k21": "À domicile", "k22": "Consultations et vaccins à la maison", "k23": "Laboratoire interne", "k24": "Résultats d'analyses en quelques minutes", "k25": "Hospitalisation", "k26": "Surveillance permanente", "k27": "Tout ce dont votre animal a besoin, au même endroit", "k28": "De la prévention à la chirurgie, nous accompagnons votre compagnon à chaque étape de sa vie.", "k29": "Consultations", "k30": "Médecine générale, bilans annuels et suivi des maladies chroniques.", "k31": "Vaccination et déparasitage", "k32": "Des plans de vaccination adaptés à l'âge et au mode de vie de votre animal.", "k33": "Chirurgie", "k34": "Stérilisations, chirurgie des tissus mous et orthopédie, sous anesthésie surveillée.", "k35": "Une équipe disponible jour et nuit, week-ends et jours fériés compris.", "k36": "Dentisterie", "k37": "Détartrage, extractions et soins d'hygiène bucco-dentaire.", "k38": "Imagerie", "k39": "Radiographie numérique et échographie pour des diagnostics rapides et précis.", "k40": "NAC", "k41": "Lapins, rongeurs, oiseaux et reptiles, avec des vétérinaires spécialisés.", "k42": "Identification électronique", "k43": "Pose de puce électronique et enregistrement obligatoire de votre animal.", "k44": "Une médecine d'excellence, avec du cœur.", "k45": "Depuis plus de 15 ans, nous prenons soin des animaux de notre ville. Nous investissons dans des équipements modernes et la formation continue, mais surtout dans le temps : le temps d'écouter, d'expliquer et de soigner sereinement.", "k46": "ans d'expérience", "k47": "vétérinaires", "k48": "tous les jours", "k49": "Prévenir, la meilleure façon de soigner", "k50": "Une mensualité simple qui inclut les consultations et vaccins essentiels, avec des réductions sur tous les autres services.", "k51": "Plan Bébé", "k52": "Chiots et chatons jusqu'à 1 an", "k53": "/mois", "k54": "Tous les vaccins de la première année", "k55": "Déparasitage interne et externe", "k56": "Consultations illimitées", "k57": "Puce électronique incluse", "k58": "Souscrire au plan", "k59": "Le plus choisi", "k60": "Plan Adulte", "k61": "Chiens et chats de 1 à 7 ans", "k62": "Vaccination annuelle", "k63": "Déparasitage toute l'année", "k64": "Bilan annuel avec analyses", "k65": "15 % de réduction sur les chirurgies", "k66": "Plan Senior", "k67": "Chiens et chats à partir de 8 ans", "k68": "Deux bilans par an avec analyses", "k69": "Échographie annuelle", "k70": "20 % de réduction sur les traitements", "k71": "Sans engagement. Résiliable à tout moment.", "k72": "Des vétérinaires passionnés", "k73": "Une équipe expérimentée, en formation continue, aux spécialités complémentaires.", "k74": "Directrice clinique · Chirurgie", "k75": "Médecine interne · Imagerie", "k76": "NAC · Dentisterie", "k77": "Avis", "k78": "La confiance de milliers de familles", "k79": "« Je suis arrivé à 3 h du matin avec mon chien qui vomissait et nous avons été pris en charge immédiatement. Ils lui ont sauvé la vie. Éternellement reconnaissants. »", "k80": "Maître de Max", "k81": "« Ma chatte a très peur de sortir et la consultation à domicile a été la meilleure solution. Très professionnels. »", "k82": "Maîtresse de Kika", "k83": "« Enfin une clinique qui s'y connaît en lapins ! Ils ont tout expliqué avec patience et Tambor s'est très bien rétabli. »", "k84": "Maîtresse de Tambor", "k85": "Questions fréquentes", "k86": "Des questions ? Nous sommes là.", "k87": "Faut-il prendre rendez-vous pour une urgence ?", "k88": "Non. En cas d'urgence, venez directement à la clinique ou appelez le 912 345 678 pour que nous préparions votre arrivée.", "k89": "Soignez-vous les NAC ?", "k90": "Oui. Nous avons des vétérinaires expérimentés avec les lapins, rongeurs, oiseaux et reptiles.", "k91": "Comment fonctionnent les plans santé ?", "k92": "Vous payez une mensualité fixe qui inclut les soins préventifs essentiels, ainsi que des réductions sur les autres services. Sans engagement.", "k93": "Quels moyens de paiement acceptez-vous ?", "k94": "Nous acceptons les espèces, les cartes de débit et de crédit, et MB WAY.", "k95": "Rendez-vous", "k96": "Prenez rendez-vous pour votre animal", "k97": "Remplissez la demande et nous vous contactons sur WhatsApp pour confirmer le jour et l'heure.", "k98": "Urgence ? Appelez maintenant", "k99": "Adresse", "k100": "Téléphone", "k101": "Consultations sur rendez-vous", "k102": "Du lundi au vendredi", "k103": "Samedi", "k104": "Dimanche", "k105": "Urgences uniquement", "k106": "Demande de rendez-vous", "k107": "Votre nom", "k108": "Nom de l'animal", "k109": "Espèce", "k110": "Chien", "k111": "Chat", "k112": "Lapin", "k113": "Oiseau", "k114": "Autre", "k115": "Motif", "k116": "Consultation", "k117": "Vaccination", "k118": "Bilan de santé", "k119": "Évaluation préopératoire", "k120": "Consultation à domicile", "k121": "Plan santé", "k122": "Date souhaitée", "k123": "Moment de la journée", "k124": "Matin", "k125": "Après-midi", "k126": "Fin de journée", "k127": "Décrivez brièvement la situation (facultatif)", "k128": "💬 Envoyer la demande sur WhatsApp", "k129": "En cas d'urgence, appelez directement : n'attendez pas la réponse.", "k130": "Clinique vétérinaire avec urgences 24 h/24. Nous prenons soin de votre meilleur ami avec science, expérience et beaucoup d'affection.", "k131": "Navigation", "k132": "Suivez-nous", "k133": "Tous droits réservés"}, "it": {"k0": "Urgenze 24 ore su 24, tutti i giorni:", "k1": "Servizi", "k2": "Piani salute", "k3": "La Clinica", "k4": "Team", "k5": "Contatti", "k6": "Prenota una visita", "k7": "Clinica Veterinaria", "k8": "🩺 Clinica veterinaria a Lisbona", "k9": "Ci prendiamo cura di chi ti dà <span>amore incondizionato.</span>", "k10": "Medicina veterinaria di fiducia per cani, gatti e animali esotici, con un team che tratta ogni paziente come uno di famiglia.", "k11": "Urgenze 24 ore su 24, 365 giorni l'anno", "k12": "Laboratorio e diagnostica per immagini in clinica", "k13": "Visite a domicilio", "k14": "📅 Prenota una visita", "k15": "🚨 Urgenza", "k16": "Animali curati", "k17": "4,9 su Google", "k18": "610 recensioni", "k19": "Urgenze 24h", "k20": "Sempre un veterinario di turno", "k21": "A domicilio", "k22": "Visite e vaccini a casa", "k23": "Laboratorio interno", "k24": "Esami in pochi minuti", "k25": "Ricovero", "k26": "Monitoraggio continuo", "k27": "Tutto ciò di cui il tuo animale ha bisogno, in un unico posto", "k28": "Dalla prevenzione alla chirurgia, accompagniamo il tuo compagno in ogni fase della vita.", "k29": "Visite", "k30": "Medicina generale, check-up annuali e gestione delle malattie croniche.", "k31": "Vaccinazioni e antiparassitari", "k32": "Piani vaccinali adatti all'età e allo stile di vita del tuo animale.", "k33": "Chirurgia", "k34": "Sterilizzazioni, chirurgia dei tessuti molli e ortopedia, con anestesia monitorata.", "k35": "Team disponibile giorno e notte, anche nei fine settimana e nei festivi.", "k36": "Odontoiatria", "k37": "Detartrasi, estrazioni e cura dell'igiene orale.", "k38": "Diagnostica per immagini", "k39": "Radiografia digitale ed ecografia per diagnosi rapide e precise.", "k40": "Animali esotici", "k41": "Conigli, roditori, uccelli e rettili, con veterinari specializzati.", "k42": "Identificazione elettronica", "k43": "Applicazione del microchip e registrazione obbligatoria del tuo animale.", "k44": "Medicina d'eccellenza, con il cuore.", "k45": "Da oltre 15 anni ci prendiamo cura degli animali della nostra città. Investiamo in attrezzature moderne e nella formazione continua, ma soprattutto nel tempo: tempo per ascoltare, spiegare e curare con calma.", "k46": "anni di esperienza", "k47": "medici veterinari", "k48": "tutti i giorni", "k49": "Prevenire è il modo migliore per prendersi cura", "k50": "Una quota mensile semplice che include visite e vaccini essenziali, con sconti su tutti gli altri servizi.", "k51": "Piano Cucciolo", "k52": "Cuccioli e gattini fino a 1 anno", "k53": "/mese", "k54": "Tutti i vaccini del primo anno", "k55": "Antiparassitari interni ed esterni", "k56": "Visite illimitate", "k57": "Microchip incluso", "k58": "Aderisci al piano", "k59": "Il più scelto", "k60": "Piano Adulto", "k61": "Cani e gatti da 1 a 7 anni", "k62": "Vaccinazione annuale", "k63": "Antiparassitari tutto l'anno", "k64": "Check-up annuale con esami", "k65": "15% di sconto sugli interventi", "k66": "Piano Senior", "k67": "Cani e gatti dagli 8 anni in su", "k68": "Due check-up all'anno con esami", "k69": "Ecografia annuale", "k70": "20% di sconto sui trattamenti", "k71": "Nessun vincolo. Puoi disdire in qualsiasi momento.", "k72": "Veterinari che amano il loro lavoro", "k73": "Un team esperto, in formazione continua e con specializzazioni complementari.", "k74": "Direttrice sanitaria · Chirurgia", "k75": "Medicina interna · Diagnostica per immagini", "k76": "Animali esotici · Odontoiatria", "k77": "Recensioni", "k78": "La fiducia di migliaia di famiglie", "k79": "“Sono arrivato alle 3 di notte con il mio cane che vomitava e ci hanno visitato subito. Gli hanno salvato la vita. Grati per sempre.”", "k80": "Padrone di Max", "k81": "“La mia gatta ha molta paura di uscire e la visita a domicilio è stata la soluzione migliore. Molto professionali.”", "k82": "Padrona di Kika", "k83": "“Finalmente una clinica che conosce i conigli! Mi hanno spiegato tutto con pazienza e Tambor si è ripreso benissimo.”", "k84": "Padrona di Tambor", "k85": "Domande frequenti", "k86": "Dubbi? Ti aiutiamo noi.", "k87": "Devo prenotare per un'urgenza?", "k88": "No. In caso di urgenza vieni direttamente in clinica o chiama il 912 345 678 così prepariamo il tuo arrivo.", "k89": "Curate animali esotici?", "k90": "Sì. Abbiamo veterinari esperti in conigli, roditori, uccelli e rettili.", "k91": "Come funzionano i piani salute?", "k92": "Paghi una quota mensile fissa che include le cure preventive essenziali, oltre a sconti sugli altri servizi. Nessun vincolo.", "k93": "Quali metodi di pagamento accettate?", "k94": "Accettiamo contanti, carte di debito e di credito e MB WAY.", "k95": "Prenotazioni", "k96": "Prenota la visita del tuo animale", "k97": "Compila la richiesta e ti contattiamo su WhatsApp per confermare giorno e ora.", "k98": "Urgenza? Chiama subito", "k99": "Indirizzo", "k100": "Telefono", "k101": "Visite su appuntamento", "k102": "Dal lunedì al venerdì", "k103": "Sabato", "k104": "Domenica", "k105": "Solo urgenze", "k106": "Richiesta di visita", "k107": "Il tuo nome", "k108": "Nome dell'animale", "k109": "Specie", "k110": "Cane", "k111": "Gatto", "k112": "Coniglio", "k113": "Uccello", "k114": "Altro", "k115": "Motivo", "k116": "Visita", "k117": "Vaccinazione", "k118": "Check-up", "k119": "Valutazione pre-operatoria", "k120": "Visita a domicilio", "k121": "Piano salute", "k122": "Data preferita", "k123": "Fascia oraria", "k124": "Mattina", "k125": "Pomeriggio", "k126": "Sera", "k127": "Descrivi brevemente la situazione (facoltativo)", "k128": "💬 Invia la richiesta su WhatsApp", "k129": "Per le urgenze chiama direttamente: non aspettare la risposta.", "k130": "Clinica veterinaria con urgenze 24 ore su 24. Ci prendiamo cura del tuo migliore amico con scienza, esperienza e tanto affetto.", "k131": "Navigazione", "k132": "Seguici", "k133": "Tutti i diritti riservati"}, "de": {"k0": "Notdienst rund um die Uhr, jeden Tag:", "k1": "Leistungen", "k2": "Gesundheitspläne", "k3": "Die Praxis", "k4": "Team", "k5": "Kontakt", "k6": "Termin buchen", "k7": "Tierklinik", "k8": "🩺 Tierklinik in Lissabon", "k9": "Wir kümmern uns um die, die Ihnen <span>bedingungslose Liebe schenken.</span>", "k10": "Vertrauenswürdige Tiermedizin für Hunde, Katzen und Exoten, mit einem Team, das jeden Patienten wie ein Familienmitglied behandelt.", "k11": "Notdienst rund um die Uhr, 365 Tage im Jahr", "k12": "Eigenes Labor und Bildgebung in der Klinik", "k13": "Hausbesuche", "k14": "📅 Termin buchen", "k15": "🚨 Notfall", "k16": "Behandelte Tiere", "k17": "4,9 bei Google", "k18": "610 Bewertungen", "k19": "24h-Notdienst", "k20": "Immer ein Tierarzt im Dienst", "k21": "Hausbesuche", "k22": "Untersuchungen und Impfungen zu Hause", "k23": "Eigenes Labor", "k24": "Laborergebnisse in wenigen Minuten", "k25": "Stationäre Aufnahme", "k26": "Rund-um-die-Uhr-Überwachung", "k27": "Alles, was Ihr Tier braucht, an einem Ort", "k28": "Von der Vorsorge bis zur Operation begleiten wir Ihren Liebling in jeder Lebensphase.", "k29": "Sprechstunden", "k30": "Allgemeinmedizin, jährliche Check-ups und Betreuung chronischer Erkrankungen.", "k31": "Impfung und Parasitenschutz", "k32": "Impfpläne, angepasst an Alter und Lebensweise Ihres Tieres.", "k33": "Chirurgie", "k34": "Kastrationen, Weichteilchirurgie und Orthopädie mit überwachter Narkose.", "k35": "Unser Team ist Tag und Nacht für Sie da, auch an Wochenenden und Feiertagen.", "k36": "Zahnheilkunde", "k37": "Zahnsteinentfernung, Extraktionen und Mundhygiene.", "k38": "Bildgebung", "k39": "Digitales Röntgen und Ultraschall für schnelle, präzise Diagnosen.", "k40": "Exoten", "k41": "Kaninchen, Nager, Vögel und Reptilien, mit spezialisierten Tierärzten.", "k42": "Elektronische Kennzeichnung", "k43": "Mikrochip-Implantation und Pflichtregistrierung Ihres Tieres.", "k44": "Spitzenmedizin mit Herz.", "k45": "Seit über 15 Jahren kümmern wir uns um die Tiere unserer Stadt. Wir investieren in moderne Geräte und ständige Weiterbildung, vor allem aber in Zeit: Zeit zum Zuhören, Erklären und für eine ruhige Behandlung.", "k46": "Jahre Erfahrung", "k47": "Tierärzte", "k48": "jeden Tag", "k49": "Vorsorge ist die beste Fürsorge", "k50": "Ein einfacher Monatsbeitrag, der die wichtigsten Untersuchungen und Impfungen abdeckt, mit Rabatten auf alle anderen Leistungen.", "k51": "Baby-Plan", "k52": "Welpen und Kätzchen bis 1 Jahr", "k53": "/Monat", "k54": "Alle Impfungen im ersten Jahr", "k55": "Innere und äußere Parasitenbehandlung", "k56": "Unbegrenzte Sprechstunden", "k57": "Mikrochip inklusive", "k58": "Plan abschließen", "k59": "Am beliebtesten", "k60": "Erwachsenen-Plan", "k61": "Hunde und Katzen von 1 bis 7 Jahren", "k62": "Jährliche Impfung", "k63": "Ganzjähriger Parasitenschutz", "k64": "Jährlicher Check-up mit Blutbild", "k65": "15 % Rabatt auf Operationen", "k66": "Senioren-Plan", "k67": "Hunde und Katzen ab 8 Jahren", "k68": "Zwei Check-ups pro Jahr mit Blutbild", "k69": "Jährlicher Ultraschall", "k70": "20 % Rabatt auf Behandlungen", "k71": "Keine Mindestlaufzeit. Jederzeit kündbar.", "k72": "Tierärzte mit Leidenschaft", "k73": "Ein erfahrenes Team mit ständiger Weiterbildung und sich ergänzenden Fachgebieten.", "k74": "Ärztliche Leiterin · Chirurgie", "k75": "Innere Medizin · Bildgebung", "k76": "Exoten · Zahnheilkunde", "k77": "Bewertungen", "k78": "Das Vertrauen tausender Familien", "k79": "„Ich kam um 3 Uhr nachts mit meinem Hund, der sich übergab, und wir wurden sofort behandelt. Sie haben ihm das Leben gerettet. Für immer dankbar.“", "k80": "Halter von Max", "k81": "„Meine Katze hat große Angst, das Haus zu verlassen, und der Hausbesuch war die perfekte Lösung. Sehr professionell.“", "k82": "Halterin von Kika", "k83": "„Endlich eine Klinik, die sich mit Kaninchen auskennt! Sie haben alles geduldig erklärt und Tambor hat sich sehr gut erholt.“", "k84": "Halterin von Tambor", "k85": "Häufige Fragen", "k86": "Fragen? Wir helfen gern.", "k87": "Muss ich für einen Notfall einen Termin buchen?", "k88": "Nein. Im Notfall kommen Sie direkt in die Klinik oder rufen Sie 912 345 678 an, damit wir Ihre Ankunft vorbereiten können.", "k89": "Behandeln Sie Exoten?", "k90": "Ja. Unsere Tierärzte haben Erfahrung mit Kaninchen, Nagern, Vögeln und Reptilien.", "k91": "Wie funktionieren die Gesundheitspläne?", "k92": "Sie zahlen einen festen Monatsbeitrag, der die wichtigste Vorsorge abdeckt, und erhalten Rabatte auf alle weiteren Leistungen. Keine Mindestlaufzeit.", "k93": "Welche Zahlungsarten akzeptieren Sie?", "k94": "Wir akzeptieren Bargeld, Debit- und Kreditkarten sowie MB WAY.", "k95": "Termine", "k96": "Buchen Sie einen Termin für Ihr Tier", "k97": "Füllen Sie die Anfrage aus und wir melden uns per WhatsApp, um Tag und Uhrzeit zu bestätigen.", "k98": "Notfall? Rufen Sie sofort an", "k99": "Adresse", "k100": "Telefon", "k101": "Sprechstunden nach Termin", "k102": "Montag bis Freitag", "k103": "Samstag", "k104": "Sonntag", "k105": "Nur Notfälle", "k106": "Terminanfrage", "k107": "Ihr Name", "k108": "Name des Tieres", "k109": "Tierart", "k110": "Hund", "k111": "Katze", "k112": "Kaninchen", "k113": "Vogel", "k114": "Andere", "k115": "Anlass", "k116": "Sprechstunde", "k117": "Impfung", "k118": "Check-up", "k119": "Voruntersuchung für OP", "k120": "Hausbesuch", "k121": "Gesundheitsplan", "k122": "Wunschdatum", "k123": "Tageszeit", "k124": "Vormittag", "k125": "Nachmittag", "k126": "Abend", "k127": "Beschreiben Sie kurz die Situation (optional)", "k128": "💬 Anfrage per WhatsApp senden", "k129": "Bei Notfällen rufen Sie bitte direkt an: Warten Sie nicht auf eine Antwort.", "k130": "Tierklinik mit 24-Stunden-Notdienst. Wir kümmern uns um Ihren besten Freund mit Wissen, Erfahrung und viel Herz.", "k131": "Navigation", "k132": "Folgen Sie uns", "k133": "Alle Rechte vorbehalten"}, "uk": {"k0": "Невідкладна допомога цілодобово, щодня:", "k1": "Послуги", "k2": "Плани здоров'я", "k3": "Клініка", "k4": "Команда", "k5": "Контакти", "k6": "Записатися на прийом", "k7": "Ветеринарна клініка", "k8": "🩺 Ветеринарна клініка в Лісабоні", "k9": "Ми дбаємо про тих, хто дарує вам <span>безумовну любов.</span>", "k10": "Надійна ветеринарна допомога для собак, котів та екзотичних тварин від команди, яка ставиться до кожного пацієнта як до члена родини.", "k11": "Невідкладна допомога цілодобово, 365 днів на рік", "k12": "Власна лабораторія та діагностика в клініці", "k13": "Виклик лікаря додому", "k14": "📅 Записатися на прийом", "k15": "🚨 Невідкладна допомога", "k16": "Вилікуваних тварин", "k17": "4,9 у Google", "k18": "610 відгуків", "k19": "Цілодобово 24/7", "k20": "Завжди черговий ветеринар", "k21": "Вдома", "k22": "Огляди та вакцинація вдома", "k23": "Власна лабораторія", "k24": "Аналізи за кілька хвилин", "k25": "Стаціонар", "k26": "Постійний нагляд", "k27": "Усе, що потрібно вашій тварині, в одному місці", "k28": "Від профілактики до хірургії — ми поруч із вашим улюбленцем на кожному етапі життя.", "k29": "Прийоми", "k30": "Загальна терапія, щорічні огляди та супровід хронічних захворювань.", "k31": "Вакцинація та обробка від паразитів", "k32": "Графіки вакцинації з урахуванням віку та способу життя вашої тварини.", "k33": "Хірургія", "k34": "Стерилізація, хірургія м'яких тканин та ортопедія з моніторингом анестезії.", "k35": "Команда працює вдень і вночі, зокрема у вихідні та святкові дні.", "k36": "Стоматологія", "k37": "Зняття зубного каменю, видалення зубів і гігієна ротової порожнини.", "k38": "Діагностична візуалізація", "k39": "Цифровий рентген і УЗД для швидкої та точної діагностики.", "k40": "Екзотичні тварини", "k41": "Кролі, гризуни, птахи та рептилії — у досвідчених ветеринарів.", "k42": "Електронна ідентифікація", "k43": "Встановлення мікрочипа та обов'язкова реєстрація вашої тварини.", "k44": "Медицина високого рівня — з душею.", "k45": "Понад 15 років ми дбаємо про тварин нашого міста. Ми інвестуємо в сучасне обладнання та постійне навчання, але передусім — у час: час вислухати, пояснити й лікувати спокійно.", "k46": "років досвіду", "k47": "ветеринарних лікарів", "k48": "щодня", "k49": "Профілактика — найкраща турбота", "k50": "Проста щомісячна плата, що включає основні огляди та вакцини, а також знижки на всі інші послуги.", "k51": "План «Малюк»", "k52": "Цуценята й кошенята до 1 року", "k53": "/міс.", "k54": "Усі вакцини першого року", "k55": "Внутрішня та зовнішня обробка від паразитів", "k56": "Необмежені прийоми", "k57": "Мікрочип включено", "k58": "Приєднатися", "k59": "Найпопулярніший", "k60": "План «Дорослий»", "k61": "Собаки й коти від 1 до 7 років", "k62": "Щорічна вакцинація", "k63": "Обробка від паразитів протягом року", "k64": "Щорічний огляд з аналізами", "k65": "Знижка 15% на операції", "k66": "План «Сеньйор»", "k67": "Собаки й коти від 8 років", "k68": "Два огляди на рік з аналізами", "k69": "Щорічне УЗД", "k70": "Знижка 20% на лікування", "k71": "Без зобов'язань. Скасувати можна будь-коли.", "k72": "Ветеринари, які люблять свою справу", "k73": "Досвідчена команда, яка постійно навчається та має взаємодоповнювальні спеціалізації.", "k74": "Медична директорка · Хірургія", "k75": "Внутрішні хвороби · Діагностична візуалізація", "k76": "Екзотичні тварини · Стоматологія", "k77": "Відгуки", "k78": "Довіра тисяч родин", "k79": "«Я приїхав о третій ночі з собакою, яку нудило, і нас прийняли одразу. Йому врятували життя. Вічно вдячні.»", "k80": "Власник Макса", "k81": "«Моя кішка дуже боїться виходити з дому, і виклик лікаря додому став найкращим рішенням. Дуже професійно.»", "k82": "Власниця Кіки", "k83": "«Нарешті клініка, яка розуміється на кролях! Усе терпляче пояснили, і Тамбор дуже добре одужав.»", "k84": "Власниця Тамбора", "k85": "Поширені запитання", "k86": "Є запитання? Ми допоможемо.", "k87": "Чи потрібно записуватися у невідкладному випадку?", "k88": "Ні. У невідкладному випадку приїжджайте одразу до клініки або телефонуйте 912 345 678, щоб ми підготувалися до вашого приїзду.", "k89": "Чи лікуєте ви екзотичних тварин?", "k90": "Так. У нас є ветеринари з досвідом роботи з кролями, гризунами, птахами та рептиліями.", "k91": "Як працюють плани здоров'я?", "k92": "Ви сплачуєте фіксовану щомісячну суму, яка покриває основну профілактику, а також отримуєте знижки на інші послуги. Без зобов'язань.", "k93": "Які способи оплати ви приймаєте?", "k94": "Ми приймаємо готівку, дебетові й кредитні картки та MB WAY.", "k95": "Запис", "k96": "Запишіть свою тварину на прийом", "k97": "Заповніть запит, і ми зв'яжемося з вами у WhatsApp, щоб підтвердити день і час.", "k98": "Невідкладно? Телефонуйте", "k99": "Адреса", "k100": "Телефон", "k101": "Планові прийоми", "k102": "Понеділок – п'ятниця", "k103": "Субота", "k104": "Неділя", "k105": "Лише невідкладні випадки", "k106": "Запит на прийом", "k107": "Ваше ім'я", "k108": "Кличка тварини", "k109": "Вид", "k110": "Собака", "k111": "Кіт", "k112": "Кріль", "k113": "Птах", "k114": "Інше", "k115": "Причина", "k116": "Прийом", "k117": "Вакцинація", "k118": "Огляд", "k119": "Огляд перед операцією", "k120": "Виклик додому", "k121": "План здоров'я", "k122": "Бажана дата", "k123": "Час доби", "k124": "Ранок", "k125": "День", "k126": "Вечір", "k127": "Коротко опишіть ситуацію (необов'язково)", "k128": "💬 Надіслати запит у WhatsApp", "k129": "У невідкладних випадках телефонуйте одразу: не чекайте на відповідь.", "k130": "Ветеринарна клініка з цілодобовою невідкладною допомогою. Ми дбаємо про вашого найкращого друга з науковим підходом, досвідом і любов'ю.", "k131": "Навігація", "k132": "Ми в соцмережах", "k133": "Усі права захищено"}, "ru": {"k0": "Неотложная помощь круглосуточно, каждый день:", "k1": "Услуги", "k2": "Планы здоровья", "k3": "Клиника", "k4": "Команда", "k5": "Контакты", "k6": "Записаться на приём", "k7": "Ветеринарная клиника", "k8": "🩺 Ветеринарная клиника в Лиссабоне", "k9": "Мы заботимся о тех, кто дарит вам <span>безусловную любовь.</span>", "k10": "Надёжная ветеринарная помощь для собак, кошек и экзотических животных от команды, которая относится к каждому пациенту как к члену семьи.", "k11": "Неотложная помощь круглосуточно, 365 дней в году", "k12": "Собственная лаборатория и диагностика в клинике", "k13": "Выезд врача на дом", "k14": "📅 Записаться на приём", "k15": "🚨 Срочная помощь", "k16": "Вылеченных животных", "k17": "4,9 в Google", "k18": "610 отзывов", "k19": "Круглосуточно 24/7", "k20": "Всегда дежурный ветеринар", "k21": "На дому", "k22": "Осмотры и прививки на дому", "k23": "Своя лаборатория", "k24": "Анализы за несколько минут", "k25": "Стационар", "k26": "Постоянное наблюдение", "k27": "Всё, что нужно вашему питомцу, в одном месте", "k28": "От профилактики до хирургии — мы рядом с вашим другом на каждом этапе жизни.", "k29": "Приёмы", "k30": "Общая терапия, ежегодные осмотры и ведение хронических заболеваний.", "k31": "Вакцинация и обработка от паразитов", "k32": "Графики вакцинации с учётом возраста и образа жизни вашего питомца.", "k33": "Хирургия", "k34": "Стерилизация, хирургия мягких тканей и ортопедия с мониторингом анестезии.", "k35": "Команда работает днём и ночью, в том числе в выходные и праздники.", "k36": "Стоматология", "k37": "Снятие зубного камня, удаление зубов и гигиена полости рта.", "k38": "Диагностическая визуализация", "k39": "Цифровой рентген и УЗИ для быстрой и точной диагностики.", "k40": "Экзотические животные", "k41": "Кролики, грызуны, птицы и рептилии — у опытных ветеринаров.", "k42": "Электронная идентификация", "k43": "Установка микрочипа и обязательная регистрация вашего питомца.", "k44": "Медицина высокого уровня — с душой.", "k45": "Более 15 лет мы заботимся о животных нашего города. Мы вкладываем в современное оборудование и постоянное обучение, но прежде всего — во время: время выслушать, объяснить и лечить спокойно.", "k46": "лет опыта", "k47": "ветеринарных врачей", "k48": "каждый день", "k49": "Профилактика — лучшая забота", "k50": "Простая ежемесячная плата, включающая основные осмотры и прививки, а также скидки на все остальные услуги.", "k51": "План «Малыш»", "k52": "Щенки и котята до 1 года", "k53": "/мес.", "k54": "Все прививки первого года", "k55": "Внутренняя и внешняя обработка от паразитов", "k56": "Неограниченные приёмы", "k57": "Микрочип включён", "k58": "Подключить план", "k59": "Самый популярный", "k60": "План «Взрослый»", "k61": "Собаки и кошки от 1 до 7 лет", "k62": "Ежегодная вакцинация", "k63": "Обработка от паразитов круглый год", "k64": "Ежегодный осмотр с анализами", "k65": "Скидка 15% на операции", "k66": "План «Сеньор»", "k67": "Собаки и кошки от 8 лет", "k68": "Два осмотра в год с анализами", "k69": "Ежегодное УЗИ", "k70": "Скидка 20% на лечение", "k71": "Без обязательств. Отменить можно в любой момент.", "k72": "Ветеринары, которые любят своё дело", "k73": "Опытная команда, которая постоянно учится и имеет взаимодополняющие специализации.", "k74": "Главный врач · Хирургия", "k75": "Внутренние болезни · Диагностическая визуализация", "k76": "Экзотические животные · Стоматология", "k77": "Отзывы", "k78": "Доверие тысяч семей", "k79": "«Я приехал в три часа ночи с собакой, которую рвало, и нас приняли сразу. Ему спасли жизнь. Вечно благодарны.»", "k80": "Хозяин Макса", "k81": "«Моя кошка очень боится выходить из дома, и выезд врача на дом стал лучшим решением. Очень профессионально.»", "k82": "Хозяйка Кики", "k83": "«Наконец-то клиника, которая разбирается в кроликах! Всё терпеливо объяснили, и Тамбор отлично поправился.»", "k84": "Хозяйка Тамбора", "k85": "Частые вопросы", "k86": "Есть вопросы? Мы поможем.", "k87": "Нужно ли записываться в экстренном случае?", "k88": "Нет. В экстренном случае приезжайте сразу в клинику или звоните 912 345 678, чтобы мы подготовились к вашему приезду.", "k89": "Вы лечите экзотических животных?", "k90": "Да. У нас есть ветеринары с опытом работы с кроликами, грызунами, птицами и рептилиями.", "k91": "Как работают планы здоровья?", "k92": "Вы платите фиксированную ежемесячную сумму, которая покрывает основную профилактику, и получаете скидки на остальные услуги. Без обязательств.", "k93": "Какие способы оплаты вы принимаете?", "k94": "Мы принимаем наличные, дебетовые и кредитные карты, а также MB WAY.", "k95": "Запись", "k96": "Запишите питомца на приём", "k97": "Заполните заявку, и мы свяжемся с вами в WhatsApp, чтобы подтвердить день и время.", "k98": "Срочно? Звоните", "k99": "Адрес", "k100": "Телефон", "k101": "Плановые приёмы", "k102": "Понедельник – пятница", "k103": "Суббота", "k104": "Воскресенье", "k105": "Только экстренные случаи", "k106": "Заявка на приём", "k107": "Ваше имя", "k108": "Кличка питомца", "k109": "Вид", "k110": "Собака", "k111": "Кошка", "k112": "Кролик", "k113": "Птица", "k114": "Другое", "k115": "Причина", "k116": "Приём", "k117": "Вакцинация", "k118": "Осмотр", "k119": "Осмотр перед операцией", "k120": "Выезд на дом", "k121": "План здоровья", "k122": "Желаемая дата", "k123": "Время суток", "k124": "Утро", "k125": "День", "k126": "Вечер", "k127": "Кратко опишите ситуацию (необязательно)", "k128": "💬 Отправить заявку в WhatsApp", "k129": "В экстренных случаях звоните сразу: не ждите ответа.", "k130": "Ветеринарная клиника с круглосуточной неотложной помощью. Мы заботимся о вашем лучшем друге с научным подходом, опытом и любовью.", "k131": "Навигация", "k132": "Мы в соцсетях", "k133": "Все права защищены"}, "ja": {"k0": "24時間救急対応・年中無休:", "k1": "診療内容", "k2": "健康プラン", "k3": "病院について", "k4": "スタッフ", "k5": "お問い合わせ", "k6": "診察を予約", "k7": "動物病院", "k8": "🩺 リスボンの動物病院", "k9": "無償の愛をくれる家族を、<span>私たちが守ります。</span>", "k10": "犬、猫、エキゾチックアニマルのための信頼できる獣医療。すべての患者を家族のように大切にするチームです。", "k11": "24時間救急、365日対応", "k12": "院内に検査室と画像診断設備", "k13": "往診対応", "k14": "📅 診察を予約", "k15": "🚨 救急", "k16": "治療した動物の数", "k17": "Google評価 4.9", "k18": "レビュー610件", "k19": "24時間救急", "k20": "常に獣医師が待機", "k21": "往診", "k22": "ご自宅で診察・ワクチン接種", "k23": "院内検査室", "k24": "数分で検査結果", "k25": "入院", "k26": "24時間体制の見守り", "k27": "ペットに必要なすべてを、一か所で", "k28": "予防から手術まで、あなたの家族の一生に寄り添います。", "k29": "一般診療", "k30": "一般内科、年1回の健康診断、慢性疾患の管理。", "k31": "ワクチン・寄生虫予防", "k32": "年齢やライフスタイルに合わせたワクチンプログラム。", "k33": "外科手術", "k34": "避妊・去勢手術、軟部外科、整形外科をモニタリング下の麻酔で。", "k35": "週末・祝日を含め、昼夜を問わず対応します。", "k36": "歯科", "k37": "歯石除去、抜歯、口腔ケア。", "k38": "画像診断", "k39": "デジタルレントゲンと超音波検査で迅速かつ正確な診断を。", "k40": "エキゾチックアニマル", "k41": "ウサギ、げっ歯類、鳥、爬虫類を専門の獣医師が診察します。", "k42": "マイクロチップ", "k43": "マイクロチップの装着と義務登録。", "k44": "心のこもった、確かな医療。", "k45": "15年以上にわたり、街の動物たちを診てきました。最新の設備と継続的な研修に投資していますが、何より大切にしているのは時間です。話を聞き、説明し、落ち着いて治療するための時間です。", "k46": "年の実績", "k47": "名の獣医師", "k48": "毎日", "k49": "予防こそ最善のケア", "k50": "基本的な診察とワクチンを含むシンプルな月額制。その他のすべてのサービスも割引になります。", "k51": "ベビープラン", "k52": "1歳までの子犬・子猫", "k53": "/月", "k54": "1年目のワクチンすべて", "k55": "内部・外部寄生虫の駆除", "k56": "診察し放題", "k57": "マイクロチップ込み", "k58": "プランに加入", "k59": "いちばん人気", "k60": "アダルトプラン", "k61": "1〜7歳の犬・猫", "k62": "年1回のワクチン", "k63": "通年の寄生虫予防", "k64": "年1回の健康診断(血液検査付き)", "k65": "手術15%オフ", "k66": "シニアプラン", "k67": "8歳以上の犬・猫", "k68": "年2回の健康診断(血液検査付き)", "k69": "年1回の超音波検査", "k70": "治療20%オフ", "k71": "契約期間の縛りなし。いつでも解約できます。", "k72": "仕事を愛する獣医師たち", "k73": "継続的に研鑽を積み、互いの専門分野を補い合う経験豊富なチームです。", "k74": "院長 · 外科", "k75": "内科 · 画像診断", "k76": "エキゾチックアニマル · 歯科", "k77": "お客様の声", "k78": "何千もの家族からの信頼", "k79": "「深夜3時に嘔吐している犬を連れて行ったら、すぐに診てくれました。命を救ってくれて、一生感謝しています。」", "k80": "Maxの飼い主", "k81": "「うちの猫は外出がとても苦手なので、往診は最高の解決策でした。とてもプロフェッショナルです。」", "k82": "Kikaの飼い主", "k83": "「やっとウサギに詳しい病院が見つかりました!丁寧に説明してくれて、Tamborもすっかり元気になりました。」", "k84": "Tamborの飼い主", "k85": "よくあるご質問", "k86": "ご不明な点はお気軽に。", "k87": "救急の場合も予約が必要ですか?", "k88": "いいえ。救急の場合は直接ご来院いただくか、912 345 678 にお電話ください。到着に備えて準備いたします。", "k89": "エキゾチックアニマルも診てもらえますか?", "k90": "はい。ウサギ、げっ歯類、鳥、爬虫類の診療経験がある獣医師が在籍しています。", "k91": "健康プランはどのような仕組みですか?", "k92": "毎月定額をお支払いいただくと、基本的な予防ケアが含まれ、その他のサービスも割引になります。契約期間の縛りはありません。", "k93": "支払い方法は何がありますか?", "k94": "現金、デビットカード、クレジットカード、MB WAYがご利用いただけます。", "k95": "ご予約", "k96": "ペットの診察を予約", "k97": "リクエストを送信いただければ、WhatsAppで日時を確定するご連絡をいたします。", "k98": "救急ですか?今すぐお電話を", "k99": "住所", "k100": "電話", "k101": "予約診療", "k102": "月曜日〜金曜日", "k103": "土曜日", "k104": "日曜日", "k105": "救急のみ", "k106": "診察予約リクエスト", "k107": "お名前", "k108": "ペットの名前", "k109": "種類", "k110": "犬", "k111": "猫", "k112": "ウサギ", "k113": "鳥", "k114": "その他", "k115": "ご来院の理由", "k116": "一般診療", "k117": "ワクチン接種", "k118": "健康診断", "k119": "手術前の診察", "k120": "往診", "k121": "健康プラン", "k122": "ご希望日", "k123": "時間帯", "k124": "午前", "k125": "午後", "k126": "夕方", "k127": "状況を簡単にご記入ください(任意)", "k128": "💬 WhatsAppでリクエストを送信", "k129": "救急の場合は返信を待たずに直接お電話ください。", "k130": "24時間救急対応の動物病院。科学と経験、そしてたっぷりの愛情であなたの大切な家族を守ります。", "k131": "メニュー", "k132": "フォローする", "k133": "無断転載禁止"}, "zh": {"k0": "24小时急诊,全年无休:", "k1": "服务项目", "k2": "健康计划", "k3": "诊所介绍", "k4": "团队", "k5": "联系我们", "k6": "预约就诊", "k7": "宠物医院", "k8": "🩺 里斯本宠物医院", "k9": "守护那些给予您<span>无条件之爱的家人。</span>", "k10": "为狗狗、猫咪和异宠提供值得信赖的兽医服务,我们的团队把每位患者都当作家人对待。", "k11": "24小时急诊,全年365天", "k12": "院内设有实验室和影像诊断", "k13": "上门诊疗", "k14": "📅 预约就诊", "k15": "🚨 急诊", "k16": "已诊治的宠物", "k17": "Google评分4.9", "k18": "610条评价", "k19": "24小时急诊", "k20": "始终有兽医值班", "k21": "上门服务", "k22": "在家看诊和接种疫苗", "k23": "自有实验室", "k24": "几分钟出检验结果", "k25": "住院", "k26": "全天候监护", "k27": "宠物所需的一切,一站式解决", "k28": "从预防到手术,陪伴您的伙伴走过生命的每个阶段。", "k29": "门诊", "k30": "普通内科、年度体检和慢性病管理。", "k31": "疫苗与驱虫", "k32": "根据宠物的年龄和生活方式制定疫苗计划。", "k33": "外科手术", "k34": "绝育、软组织手术和骨科手术,全程麻醉监测。", "k35": "团队昼夜待命,周末和节假日也不例外。", "k36": "牙科", "k37": "洗牙、拔牙和口腔护理。", "k38": "影像诊断", "k39": "数字X光和超声检查,诊断快速准确。", "k40": "异宠", "k41": "兔子、啮齿类、鸟类和爬行类,由专业兽医诊治。", "k42": "电子识别", "k43": "植入芯片并完成法定登记。", "k44": "卓越医疗,用心守护。", "k45": "15年多来,我们一直守护着这座城市的动物。我们投资于现代设备和持续培训,但最重要的是投入时间:倾听、解释并从容治疗的时间。", "k46": "年经验", "k47": "位兽医", "k48": "每天", "k49": "预防是最好的关爱", "k50": "简单的月费包含基础体检和疫苗,其他所有服务还可享受折扣。", "k51": "幼宠计划", "k52": "1岁以下的幼犬和幼猫", "k53": "/月", "k54": "第一年的全部疫苗", "k55": "体内外驱虫", "k56": "不限次数门诊", "k57": "含植入芯片", "k58": "加入计划", "k59": "最受欢迎", "k60": "成年计划", "k61": "1至7岁的狗狗和猫咪", "k62": "年度疫苗", "k63": "全年驱虫", "k64": "年度体检(含化验)", "k65": "手术85折", "k66": "老年计划", "k67": "8岁及以上的狗狗和猫咪", "k68": "每年两次体检(含化验)", "k69": "年度超声检查", "k70": "治疗8折", "k71": "无绑定期限,可随时取消。", "k72": "热爱事业的兽医团队", "k73": "经验丰富、持续进修、专长互补的团队。", "k74": "院长 · 外科", "k75": "内科 · 影像诊断", "k76": "异宠 · 牙科", "k77": "客户评价", "k78": "数千个家庭的信赖", "k79": "“凌晨3点我带着呕吐的狗狗赶来,立刻就得到了救治。他们救了它的命,我们永远感激。”", "k80": "Max的主人", "k81": "“我的猫非常害怕出门,上门诊疗是最好的解决办法。非常专业。”", "k82": "Kika的主人", "k83": "“终于找到懂兔子的诊所了!他们耐心解释了一切,Tambor恢复得很好。”", "k84": "Tambor的主人", "k85": "常见问题", "k86": "有疑问?我们来帮您。", "k87": "急诊需要预约吗?", "k88": "不需要。遇到紧急情况请直接来院,或致电912 345 678,我们会提前做好准备。", "k89": "你们接诊异宠吗?", "k90": "是的。我们有熟悉兔子、啮齿类、鸟类和爬行类的兽医。", "k91": "健康计划如何运作?", "k92": "您每月支付固定费用,即可享受基础预防护理,其他服务也有折扣。无绑定期限。", "k93": "接受哪些付款方式?", "k94": "我们接受现金、借记卡、信用卡和MB WAY。", "k95": "预约", "k96": "为您的宠物预约", "k97": "填写申请后,我们会通过WhatsApp联系您确认日期和时间。", "k98": "急诊?请立即致电", "k99": "地址", "k100": "电话", "k101": "预约门诊", "k102": "周一至周五", "k103": "周六", "k104": "周日", "k105": "仅限急诊", "k106": "就诊申请", "k107": "您的姓名", "k108": "宠物名字", "k109": "种类", "k110": "狗", "k111": "猫", "k112": "兔子", "k113": "鸟", "k114": "其他", "k115": "就诊原因", "k116": "门诊", "k117": "疫苗接种", "k118": "体检", "k119": "术前评估", "k120": "上门诊疗", "k121": "健康计划", "k122": "期望日期", "k123": "时段", "k124": "上午", "k125": "下午", "k126": "傍晚", "k127": "请简要描述情况(可选)", "k128": "💬 通过WhatsApp发送申请", "k129": "急诊请直接致电,无需等待回复。", "k130": "提供24小时急诊的宠物医院。我们以科学、经验和满满的爱守护您最好的朋友。", "k131": "导航", "k132": "关注我们", "k133": "版权所有"}};
+  const LANG_FLAGS = {"pt": "https://flagcdn.com/w40/pt.png", "en": "https://flagcdn.com/w40/gb.png", "es": "https://flagcdn.com/w40/es.png", "fr": "https://flagcdn.com/w40/fr.png", "it": "https://flagcdn.com/w40/it.png", "de": "https://flagcdn.com/w40/de.png", "uk": "https://flagcdn.com/w40/ua.png", "ru": "https://flagcdn.com/w40/ru.png", "ja": "https://flagcdn.com/w40/jp.png", "zh": "https://flagcdn.com/w40/cn.png"};
+  const ptText = {};
+  document.querySelectorAll('[data-i18n]').forEach(el => { ptText[el.dataset.i18n] = el.innerHTML; });
+  const langBox = document.getElementById('lang');
+  function setLang(lang) {
+    if (lang !== 'pt' && !I18N[lang]) lang = 'pt';
+    const dict = I18N[lang] || {};
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.dataset.i18n; el.innerHTML = dict[k] ?? ptText[k]; });
+    document.documentElement.lang = lang === 'pt' ? 'pt-PT' : lang;
+    document.getElementById('langFlag').src = LANG_FLAGS[lang];
+    document.getElementById('langCode').textContent = lang.toUpperCase();
+    document.querySelectorAll('#langMenu button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  document.getElementById('langBtn').addEventListener('click', e => {
+    e.stopPropagation();
+    const open = langBox.classList.toggle('open');
+    e.currentTarget.setAttribute('aria-expanded', open);
+  });
+  document.querySelectorAll('#langMenu button').forEach(b => b.addEventListener('click', () => { setLang(b.dataset.lang); langBox.classList.remove('open'); }));
+  document.addEventListener('click', () => langBox.classList.remove('open'));
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  setLang(saved || (navigator.language || 'pt').slice(0, 2));
+</script>
+</body>
+</html>
